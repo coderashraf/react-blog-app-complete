@@ -1,0 +1,92 @@
+#navCompo {
+  margin-top: 1rem;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+.iconA {
+  transform: matrix(0, -1, 1, 0, 0, 0);
+  text-align: left;
+  font-size: 1.56rem;
+  font-weight: 500;
+  padding-top: 1rem;
+  cursor: pointer;
+}
+.iconB {
+  font: bold 55px/87px Montserrat;
+  cursor: pointer;
+}
+.menu {
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 10px;
+  display: none;
+}
+.menu i {
+  font-size: 2rem;
+}
+
+#check {
+  display: none;
+}
+.nav-item {
+  display: flex;
+  justify-content: space-evenly;
+  width: 90%;
+  margin: 1rem auto;
+}
+.nav a {
+  text-decoration: none;
+  color: black;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+@media (max-width: 768px) {
+  #navCompo {
+    width: 90%;
+  }
+  .icon {
+    margin-right: auto;
+  }
+  .iconA {
+    font-size: 15px;
+    height: fit-content;
+    margin-top: 1.7rem;
+    margin-right: 2px;
+  }
+  .iconB {
+    font-size: 35px;
+  }
+  .menu {
+    display: block;
+  }
+  .nav {
+    margin: 0;
+  }
+  .nav-item {
+    display: none;
+    margin-top: 0;
+  }
+
+  #check:checked ~ .nav-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .nav a {
+    border-bottom: 1px solid silver;
+    padding: 5px 0;
+  }
+  .nav a:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  #navCompo {
+    width: 90%;
+  }
+}
