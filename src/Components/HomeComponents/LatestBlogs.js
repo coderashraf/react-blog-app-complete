@@ -18,7 +18,7 @@ const LatestBlogs = () => {
             key={item.id}
             onClick={() => navigate(`/${item.category}/${item.id}`)}
           >
-            <img src={item.image}></img>
+            <img src={item.image} alt=" "></img>
             <div className="latest-blogs-card-info">
               <h3>{item.title.slice(0, 60)}</h3>
               <p className="two-lines">{item.text.slice(0, 100)}</p>

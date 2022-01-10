@@ -10,7 +10,6 @@ const CategorizedBlogs = () => {
   const blogs = Blogs.filter(
     (blog) => blog.category === category.toString()
   ).reverse();
-  const sorted = Blogs;
   useEffect(() => {
     const found = categories.find((element) => element === category);
     if (found === undefined) {

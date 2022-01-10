@@ -4,7 +4,7 @@ import Blogs from "./database";
 const Blog = () => {
   let navigate = useNavigate();
   let { category, blogId } = useParams();
-  let blog = Blogs.filter((item) => item.id == blogId);
+  let blog = Blogs.filter((item) => item.id === blogId);
   let moreArticles = Blogs.filter(
     (item, index) => item.category === category && item.id !== parseInt(blogId)
   ).filter((item, index) => index < 3);
@@ -62,7 +62,7 @@ const Blog = () => {
             )}
           </div>
           <div className="claps flex">
-            <img src="/images/rythm.svg"></img>
+            <img src="/images/rythm.svg" alt="clap-img"></img>
             <p>{blog[0].claps}&nbsp;claps</p>
           </div>
           <div className="author flex">
