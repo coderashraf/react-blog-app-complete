@@ -4,14 +4,12 @@ import Blogs from "../database";
 import TopPosts from "../TopPosts";
 const LatestBollywood = () => {
   let navigate = useNavigate();
-  console.log(Blogs);
   const tempBlogs = Blogs.filter((blog) => blog.category === "Bollywood");
   const blogs = tempBlogs
     .filter(
       (blog, index) => index < tempBlogs.length && index > tempBlogs.length - 5
     )
     .reverse();
-  console.log(blogs);
   const techLatestBlog = Blogs.filter(
     (blog) => blog.category === "Technology"
   ).splice(-1);

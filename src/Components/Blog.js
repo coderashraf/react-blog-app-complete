@@ -4,11 +4,10 @@ import Blogs from "./database";
 const Blog = () => {
   let navigate = useNavigate();
   let { category, blogId } = useParams();
-  let blog = Blogs.filter((item) => item.id === blogId);
+  let blog = Blogs.filter((item) => item.id === parseInt(blogId));
   let moreArticles = Blogs.filter(
     (item, index) => item.category === category && item.id !== parseInt(blogId)
   ).filter((item, index) => index < 3);
-  console.log(moreArticles);
   useEffect(() => {
     const found = Blogs.find((element) => element.id === parseInt(blogId));
     if (found === undefined) {
@@ -41,10 +40,10 @@ const Blog = () => {
             </div>
           </div>
           <div className="social">
-            <i class="fa-brands fa-facebook-square"></i>
-            <i class="fa-brands fa-twitter-square"></i>
-            <i class="fa-brands fa-instagram-square"></i>
-            <i class="fa-brands fa-youtube-square"></i>
+            <i className="fa-brands fa-facebook-square"></i>
+            <i className="fa-brands fa-twitter-square"></i>
+            <i className="fa-brands fa-instagram-square"></i>
+            <i className="fa-brands fa-youtube-square"></i>
           </div>
         </div>
         <div className="blog-content">
@@ -62,7 +61,7 @@ const Blog = () => {
             )}
           </div>
           <div className="claps flex">
-            <img src="/images/rythm.svg" alt="clap-img"></img>
+            <img src="/images/rythm.svg" alt=" "></img>
             <p>{blog[0].claps}&nbsp;claps</p>
           </div>
           <div className="author flex">
@@ -86,6 +85,7 @@ const Blog = () => {
               <div
                 className="more-articles-card"
                 onClick={() => navigate(`/${item.category}/${item.id}`)}
+                key={item.id}
               >
                 <p className="related-reads">Related reads</p>
                 <img src={item.image} alt={item.title} />
