@@ -33,7 +33,7 @@
   margin-top: 4rem;
 }
 .categorized-blogs .blogs img {
-  width: 30rem;
+  min-width: 10rem;
   background-size: cover;
 }
 .categorized-blogs .top-posts {
