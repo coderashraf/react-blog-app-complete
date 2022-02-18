@@ -1,5 +1,4 @@
 import React from "react";
-// import Blogs from "./database";
 import Gallery from "./HomeComponents/Gallery";
 import "./HomeComponents/homeStyle.css";
 import LatestBlogs from "./HomeComponents/LatestBlogs";

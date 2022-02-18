@@ -1,15 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Blogs from "./database";
+
 const TopPosts = () => {
-  const navigate = useNavigate();
-  const sorted = Blogs.map((a) => {
-    return { ...a };
-  });
-  sorted.sort(function (a, b) {
-    return b.claps - a.claps;
-  });
+const navigate=useNavigate()
+
+  const [sorted,setSorted]=useState([])
+ 
+  useEffect(() => {
+    axios.get("https://blog-app-backend-coderashraf.herokuapp.com/api/top-posts").then((res)=>{
+      setSorted(res.data)
+    }) 
+  },[])
+
+  if (sorted.length<=0){ return null}
+  else{
   return (
+    
     <div className="top-posts">
       <h2>Top Posts</h2>
       <div className="hr" />
@@ -53,7 +60,7 @@ const TopPosts = () => {
           )
       )}
     </div>
-  );
+  );}
 };
 
 export default TopPosts;

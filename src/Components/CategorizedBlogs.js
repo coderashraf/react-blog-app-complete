@@ -1,22 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Blogs from "./database";
 import TopPosts from "./TopPosts";
+import axios from "axios";
+
 
 const CategorizedBlogs = () => {
   let navigate = useNavigate();
   let categories = ["Bollywood", "Technology", "Hollywood", "Fitness", "Food"];
   let { category } = useParams();
-  const blogs = Blogs.filter(
-    (blog) => blog.category === category.toString()
-  ).reverse();
+  const [blogs,setBlogs]=useState([])
+
   useEffect(() => {
     const found = categories.find((element) => element === category);
     if (found === undefined) {
       navigate("/pagenotfound");
     }
-  });
-  return (
+  },);
+  useEffect(() => {
+    //api call
+    axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/category/${category}`).then((res)=>{
+    setBlogs(res.data)
+    })
+  }, [category])
+  
+  if(blogs.length<=0){return null}
+  else {
+    return (
     <div className="categorized-blogs">
       <div className="flex latest-bollywood-container">
         <div className="latest-bollywood-larea">
@@ -54,7 +63,7 @@ const CategorizedBlogs = () => {
         </div>
       </div>
     </div>
-  );
+  );}
 };
 
 export default CategorizedBlogs;

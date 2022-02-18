@@ -9,6 +9,7 @@ import CategorizedBlogs from "./Components/CategorizedBlogs";
 import Blog from "./Components/Blog";
 import ScrollToTop from "./Components/scrollToTop";
 
+
 function App() {
   return (
     <div className="App">

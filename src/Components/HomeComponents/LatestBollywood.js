@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Blogs from "../database";
 import TopPosts from "../TopPosts";
+import VerticalGallery from "./VerticalGallery";
+import axios from "axios";
+
 const LatestBollywood = () => {
   let navigate = useNavigate();
-  const tempBlogs = Blogs.filter((blog) => blog.category === "Bollywood");
-  const blogs = tempBlogs
-    .filter(
-      (blog, index) => index < tempBlogs.length && index > tempBlogs.length - 5
-    )
-    .reverse();
-  const techLatestBlog = Blogs.filter(
-    (blog) => blog.category === "Technology"
-  ).splice(-1);
+
+  const [blogs,setBlogs]=useState([])
+  useEffect(() => {
+    axios.get("https://blog-app-backend-coderashraf.herokuapp.com/api/latest-bollywood").then((res)=>{
+      setBlogs(res.data)
+    })
+  }, [])
+
+  if(blogs.length<=0){return null}
+  else{
   return (
     <div>
       <h2>Latest Bollywood Articles</h2>
@@ -64,22 +67,7 @@ const LatestBollywood = () => {
             <img src="images/arrow.svg" alt="down-arrow" />
             <p>LOAD MORE</p>
           </div>
-          <div
-            className="vertical-gallery"
-            style={{
-              backgroundImage: `url(${techLatestBlog[0].image})`,
-              backgroundRepeat: "no-repeat",
-              WebkitBackgroundSize: "cover",
-            }}
-            onClick={() =>
-              navigate(`/${techLatestBlog[0].category}/${techLatestBlog[0].id}`)
-            }
-          >
-            <h2>{techLatestBlog[0].title}</h2>
-            <p>
-              {techLatestBlog[0].category}/ {techLatestBlog[0].date}
-            </p>
-          </div>
+          <VerticalGallery/>
         </div>
         <div className="latest-bollywood-rarea ">
           <div className="advertisement">
@@ -89,7 +77,7 @@ const LatestBollywood = () => {
         </div>
       </div>
     </div>
-  );
+  );}
 };
 
 export default LatestBollywood;

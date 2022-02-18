@@ -1,12 +1,21 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Blogs from "../database";
 
 const LatestBlogs = () => {
   let navigate = useNavigate();
-  const latest = Blogs.filter(
-    (blog, index) => index < Blogs.length && index > Blogs.length - 4
-  );
+  
+  const [latest,setLatest]=useState([])
+
+  useEffect(() => {
+    axios.get("https://blog-app-backend-coderashraf.herokuapp.com/api/latest-blogs").then((res)=>{
+      setLatest(res.data)
+    })
+  }, [])
+  
+
+  if(latest.length<=0){return null}
+  else{
   return (
     <div id="latest-blogs">
       <h2> The Latest Articles</h2>
@@ -31,7 +40,7 @@ const LatestBlogs = () => {
         ))}
       </div>
     </div>
-  );
+  );}
 };
 
 export default LatestBlogs;

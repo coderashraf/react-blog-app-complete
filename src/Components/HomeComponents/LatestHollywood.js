@@ -1,13 +1,19 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Blogs from "../database";
+
 const LatestHollywood = () => {
   let navigate = useNavigate();
-  const hollywoodBlogs = Blogs.filter((blog) => blog.category === "Hollywood");
-  const latest = hollywoodBlogs.filter(
-    (blog, index) =>
-      index < hollywoodBlogs.length && index > hollywoodBlogs.length - 4
-  );
+  const [latest,setLatest]=useState([])
+
+  useEffect(() => {
+    axios.get("https://blog-app-backend-coderashraf.herokuapp.com/api/latest-hollywood").then((res)=>{
+      setLatest(res.data)
+    })
+  }, [])
+
+  if(latest.length<=0){return null}
+  else{
   return (
     <div className="latest-hollywood">
       <h2> Latest Hollywood Articles</h2>
@@ -38,7 +44,7 @@ const LatestHollywood = () => {
         <img src="images/arrow-1.svg" alt="down-arrow" />
       </div>
     </div>
-  );
+  );}
 };
 
 export default LatestHollywood;

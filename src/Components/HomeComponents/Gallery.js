@@ -1,9 +1,19 @@
-import React from "react";
-import Blogs from "../database";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
 const Gallery = () => {
   let navigate = useNavigate();
-  const travel = Blogs.filter((blog) => blog.category === "Travel");
+  const [travel,setTravel]=useState([])
+  
+  useEffect(() => {
+    axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/category/Travel`).then((res)=>{
+      setTravel(res.data.reverse())
+    })
+  },[])
+  
+  if (travel.length<=0){ return null}
+  else{
   return (
     <div className="gallery flex" id="gallery">
       <div
@@ -22,7 +32,7 @@ const Gallery = () => {
       </div>
       <div className="gallery-right flex">
         {travel
-          .filter((item, index) => index > 0)
+          .filter((item, index) => index > 0 && index<3)
           .map((item) => (
             <div
               key={item.id}
@@ -42,6 +52,7 @@ const Gallery = () => {
       </div>
     </div>
   );
+}
 };
 
 export default Gallery;
