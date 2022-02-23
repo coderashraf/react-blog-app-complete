@@ -6,21 +6,30 @@ const Blog = () => {
   let navigate = useNavigate();
   let { blogId } = useParams();
   
-  const [blog,setBlog]=useState([])
+  const [blogs,setBlogs]=useState([])
 
   useEffect(() => {
     //api call 
     axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/blog/${blogId}`).then((res)=>{
-    setBlog(res.data)
+    setBlogs(res.data)
     })
     .catch(error => {
       navigate("/pagenotfound");
     });
   },[blogId,navigate]);
 
+if(blogs.length<=0){
+  return (
+    <div className="loader">
+      <div className="bounce1"></div>
+      <div className="bounce2"></div>
+      <div className="bounce3"></div>
+    </div>
+    )
+}else{
   return (
     <div className="blog-main">
-      {blog.map((item,index) => index < 1 && (
+      {blogs.map((item,index) => index < 1 && (
       <div className="blog-container" key={item.id}>
         <h2>{item.title}</h2>
          <div className="clap-share">
@@ -85,7 +94,7 @@ const Blog = () => {
           <h2>More From The Siren</h2>
           <hr />
           <div className="flex more-articles-cards">
-            {blog.map((item,index) => index>0&&(
+            {blogs.map((item,index) => index>0&&(
               <div
                 className="more-articles-card"
                 onClick={() => navigate(`/${item.category}/${item.id}`)}
@@ -111,6 +120,7 @@ const Blog = () => {
       </div>
     </div>
   );
+}
 };
 
 export default Blog;

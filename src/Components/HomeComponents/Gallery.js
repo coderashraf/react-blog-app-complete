@@ -12,7 +12,12 @@ const Gallery = () => {
     })
   },[])
   
-  if (travel.length<=0){ return null}
+  if (travel.length<=0){ return (
+  <div className="loader">
+    <div className="bounce1"></div>
+    <div className="bounce2"></div>
+    <div className="bounce3"></div>
+</div>)}
   else{
   return (
     <div className="gallery flex" id="gallery">
