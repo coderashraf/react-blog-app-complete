@@ -9,7 +9,7 @@ const VerticalGallery = () => {
   const [techLatestBlog,setTechLatestBlog]=useState([])
   useEffect(() => {
     //api call to get the last post of technology category
-    axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/latestTechBlog/`).then((res)=>{
+    axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/latestTechBlog`).then((res)=>{
       setTechLatestBlog(res.data)
     })
   },[]);
