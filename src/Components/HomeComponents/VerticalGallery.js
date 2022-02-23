@@ -7,13 +7,12 @@ const VerticalGallery = () => {
 
   let navigate = useNavigate();
   const [techLatestBlog,setTechLatestBlog]=useState([])
-  const blogId=-1
   useEffect(() => {
     //api call to get the last post of technology category
-    axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/blog/${blogId}`).then((res)=>{
+    axios.get(`https://blog-app-backend-coderashraf.herokuapp.com/api/blog/`,{params:{category:"technology"}}).then((res)=>{
       setTechLatestBlog(res.data)
     })
-  },[blogId]);
+  },[]);
 
   if(techLatestBlog.length<=0){return null}
   else{
